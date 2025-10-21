@@ -15,8 +15,8 @@ export const getTaskById = async (id: string) => {
   return taskSchema.parse(data);
 };
 
-export const createTask = async (task: TNewTask) => {
-  const data = await fetchData<TNewTask>("/tasks", "POST", task);
+export const addTask = async (task: TNewTask) => {
+  const data = await fetchData<TNewTask>("/tasks", "POST", { ...task, createdAt: new Date() });
 
   return taskSchema.parse(data);
 };
