@@ -8,11 +8,12 @@ export class Modal {
 
   private constructor() {}
 
-  private initModalEl() {
+  private initModalEl(title?: string) {
     this.modalEl = getNodeFromStr(`
     <div id="modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
+        ${title ? `<h2>${title}</h2>` : ""}
         <div class="body"></div>
       </div>
     </div>
@@ -44,10 +45,10 @@ export class Modal {
     this.isOpen = false;
   }
 
-  static init() {
+  static init(title?: string) {
     if (!Modal.instance) {
       Modal.instance = new Modal();
-      Modal.instance.initModalEl();
+      Modal.instance.initModalEl(title);
     }
     return Modal.instance;
   }
