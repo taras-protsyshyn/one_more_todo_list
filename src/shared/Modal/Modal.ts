@@ -1,15 +1,17 @@
-import { getNodeFromStr } from "../../utils/getNodeFromStr";
+import { UIComponent } from "../UIComponent/UIComponent";
 
-export class Modal {
+export class Modal extends UIComponent {
   private static instance: Modal;
   private modalEl: HTMLElement = null!;
   private closeModalEl: HTMLElement = null!;
   private isOpen: boolean = false;
 
-  private constructor() {}
+  private constructor() {
+    super();
+  }
 
   private initModalEl(title?: string) {
-    this.modalEl = getNodeFromStr(`
+    this.modalEl = this.parseTemplate(`
     <div id="modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
