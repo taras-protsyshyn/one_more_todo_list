@@ -1,24 +1,12 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import "./style.css";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+import { TasksState } from "./modules/tasks/TasksState";
+import { TasksListComponent } from "./modules/tasks/ui/TasksList/TasksList";
+import { NewTaskComponent } from "./modules/tasks/ui/NewTask/NewTask";
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const app = document.querySelector<HTMLDivElement>("#app")!;
+
+const instanceTasks = await TasksState.init();
+instanceTasks.subscribe(new TasksListComponent(app));
+
+new NewTaskComponent(app);

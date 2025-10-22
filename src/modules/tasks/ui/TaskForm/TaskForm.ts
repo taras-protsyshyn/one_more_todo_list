@@ -22,8 +22,27 @@ export class TaskForm extends UIComponent {
         <option value="${Priority.High}">Високий</option>
         </select>
         <textarea  rows="3" type="text" class="description" id="description" name="description" placeholder="Опис" ></textarea>
-        <button type="submit">Нове</button>
+        <button type="submit">Save</button>
       </form>
     `);
+  }
+
+  setValues(
+    values: Partial<{
+      title: string;
+      description: string;
+      deadline: string;
+      priority: Priority;
+      status: Status;
+    }>
+  ) {
+    (this.node.querySelector("#title") as HTMLInputElement).value = values.title || "";
+    (this.node.querySelector("#description") as HTMLTextAreaElement).value =
+      values.description || "";
+    (this.node.querySelector("#deadline") as HTMLInputElement).value = values.deadline || "";
+    (this.node.querySelector("select[name='priority']") as HTMLSelectElement).value =
+      values.priority || Priority.Low;
+    (this.node.querySelector("select[name='status']") as HTMLSelectElement).value =
+      values.status || Status.Todo;
   }
 }

@@ -1,6 +1,6 @@
 import type { TNewTask, TTask, TTasksState, TasksComponent } from "./tasks.types";
 
-import { getTasks, addTask } from "./tasks.api";
+import { getTasks, addTask, deleteTask } from "./tasks.api";
 
 export class TasksState {
   private static instance: TasksState;
@@ -43,6 +43,12 @@ export class TasksState {
   async addTask(task: TNewTask) {
     const newTask = await addTask(task);
     this.data.tasks.push(newTask);
+    this.notify();
+  }
+
+  async deleteTask(id: string) {
+    await deleteTask(id);
+    this.data.tasks = this.data.tasks.filter((task) => task.id !== id);
     this.notify();
   }
 }

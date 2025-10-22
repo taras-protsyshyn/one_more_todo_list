@@ -28,6 +28,6 @@ export const updateTask = async (task: TTask) => {
 };
 
 export const deleteTask = async (id: string) => {
-  await fetchData<TTask>(`/tasks${id}`, "DELETE");
+  await fetchData<TTask>(`/tasks/${id}`, "DELETE");
   return id;
 };

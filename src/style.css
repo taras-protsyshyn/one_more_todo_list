@@ -1,20 +1,22 @@
 @import "./shared/Modal/modal.css";
 @import "./modules/tasks/ui/TaskForm/task_form.css";
+@import "./modules/tasks/ui/NewTask/new_task.css";
+@import "./modules/tasks/ui/TasksList/tasks_list.css";
 
 :root {
   --bg-color: #242424;
+  --input-bg-color: #1e1e1e;
   --text-color: rgba(255, 255, 255, 0.87);
   --br-radius: 12px;
   --btn-bg: #646cff;
+  --br-color: #444;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: var(--text-color);
   background-color: var(--bg-color);
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -51,14 +53,6 @@ h1 {
   text-align: center;
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 button {
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -67,7 +61,7 @@ button {
   font-family: inherit;
   background-color: var(--btn-bg);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s ease-in-out;
   border: 1px solid var(--btn-bg);
   border-radius: var(--br-radius);
 }
@@ -76,7 +70,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: none;
 }
 
 input,
@@ -85,7 +79,27 @@ textarea {
   font: inherit;
   padding: 0.5em;
   border-radius: var(--br-radius);
-  border: 1px solid #444;
-  background-color: #1e1e1e;
+  border: 1px solid var(--br-color);
+  background-color: var(--input-bg-color);
   color: var(--text-color);
+  cursor: pointer;
+  transition: border-color 0.25s ease-in-out;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: white;
+}
+
+/* reset styles for ul ol and li */
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+li {
+  margin: 0;
+  padding: 0;
 }
