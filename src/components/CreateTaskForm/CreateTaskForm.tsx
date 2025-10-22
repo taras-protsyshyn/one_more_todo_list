@@ -4,18 +4,16 @@ import { useCallApi } from "../../hooks/useCallApi";
 import { addTask } from "../../api/api";
 import { Modal, TaskForm } from "../";
 import "./createTaskForm.css";
-import type { TNewTask, TTask } from "../../types";
+import type { TTask, TTaskFormValues } from "../../types";
 
 export const CreateTaskForm = () => {
   const [isOpen, setOpen] = useState(false);
-  const [callAddTask, { data }] = useCallApi<TTask, TNewTask>(addTask);
+  const [callAddTask] = useCallApi<TTask, TTaskFormValues>(addTask);
 
-  const onSubmit = (data: TNewTask) => {
+  const onSubmit = (data: TTaskFormValues) => {
     callAddTask(data);
     setOpen(false);
   };
-
-  console.log("new Task", data);
 
   return (
     <>

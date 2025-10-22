@@ -1,0 +1,25 @@
+.inputWrapper {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+.inputError input,
+.inputError select,
+.inputError textarea {
+  border: 1px solid red;
+}
+
+.errorMessage {
+  margin-left: 10px;
+  opacity: 0;
+}
+
+.inputError .errorMessage {
+  color: red;
+  font-size: 0.7em;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  opacity: 1;
+}

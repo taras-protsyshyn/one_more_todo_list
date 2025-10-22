@@ -1,5 +1,5 @@
 import { taskSchema } from "../schemas";
-import type { TEditTask, TNewTask, TTask } from "../types";
+import type { TEditTask, TNewTask, TTask, TTaskFormValues } from "../types";
 
 const API_BASE_URL = "http://localhost:3001";
 
@@ -33,7 +33,7 @@ export const getTaskById = async (id: string) => {
   return taskSchema.parse(data);
 };
 
-export const addTask = async (task: TNewTask) => {
+export const addTask = async (task: TTaskFormValues) => {
   const data = await fetchData<TNewTask>("/tasks", "POST", { ...task, createdAt: new Date() });
 
   return taskSchema.parse(data);
