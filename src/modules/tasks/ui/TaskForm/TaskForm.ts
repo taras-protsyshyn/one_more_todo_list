@@ -1,6 +1,7 @@
 import { Priority, Status } from "../../task.constants";
 
 import { UIComponent } from "../../../../shared/UIComponent/UIComponent";
+import type { TTaskFormValues } from "../../tasks.types";
 
 export class TaskForm extends UIComponent {
   node: HTMLElement = null!;
@@ -44,5 +45,30 @@ export class TaskForm extends UIComponent {
       values.priority || Priority.Low;
     (this.node.querySelector("select[name='status']") as HTMLSelectElement).value =
       values.status || Status.Todo;
+  }
+
+  onSubmit(cb: (formData: TTaskFormValues) => void) {
+    this.node.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const form = event.target as HTMLFormElement;
+      const formData = new FormData(form);
+
+      const title = formData.get("title") as string;
+      const description = formData.get("description") as string;
+      const deadline = formData.get("deadline") as string;
+      const priority = formData.get("priority") as Priority;
+      const status = formData.get("status") as Status;
+
+      cb({
+        title,
+        description,
+        priority,
+        deadline: new Date(deadline),
+        status: status || Status.Todo,
+      });
+
+      form.reset();
+    });
   }
 }

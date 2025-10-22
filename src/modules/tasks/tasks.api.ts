@@ -1,7 +1,7 @@
 import { fetchData } from "../../api/api";
 
 import { taskSchema } from "./tasks.schemas";
-import type { TNewTask, TTask } from "./tasks.types";
+import type { TEditTask, TNewTask, TTask } from "./tasks.types";
 
 export const getTasks = async () => {
   const data = await fetchData("/tasks");
@@ -21,8 +21,8 @@ export const addTask = async (task: TNewTask) => {
   return taskSchema.parse(data);
 };
 
-export const updateTask = async (task: TTask) => {
-  const data = await fetchData<TTask>(`/tasks/${task.id}`, "PATCH", task);
+export const updateTask = async (task: TEditTask) => {
+  const data = await fetchData<TEditTask>(`/tasks/${task.id}`, "PATCH", task);
 
   return taskSchema.parse(data);
 };

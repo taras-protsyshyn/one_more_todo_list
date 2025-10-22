@@ -8,7 +8,8 @@ export type Filters = { status?: Status; priority?: Priority; createdAt?: Date }
 export type TTask = z.infer<typeof taskSchema>;
 
 export type TNewTask = Omit<TTask, "id">;
-
+export type TEditTask = Omit<TTask, "createdAt">;
+export type TTaskFormValues = Omit<TNewTask, "createdAt">;
 export type TTasksState = {
   tasks: TTask[];
 };

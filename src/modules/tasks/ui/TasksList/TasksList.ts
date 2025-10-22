@@ -1,4 +1,4 @@
-import type { TTask, TTasksState } from "../../tasks.types";
+import type { TTask, TTaskFormValues, TTasksState } from "../../tasks.types";
 import { UIComponent } from "../../../../shared/UIComponent/UIComponent";
 import { formatDate } from "../../../../utils/formatDate";
 import { Modal } from "../../../../shared/Modal/Modal";
@@ -28,6 +28,8 @@ export class TasksListComponent extends UIComponent {
     this.state = TasksState.getInstance();
     this.modal = Modal.init("Редагувати завдання");
     this.form = new TaskForm();
+
+    this.form.onSubmit((data) => this.editTask(data));
     this.list = this.container.querySelector("ul") as HTMLElement;
   }
 
@@ -50,6 +52,18 @@ export class TasksListComponent extends UIComponent {
       </button>
     </li>
   `);
+  }
+
+  async editTask(data: TTaskFormValues) {
+    if (this.editedTaskId) {
+      await this.state.updateTask({
+        id: this.editedTaskId,
+        ...data,
+      });
+      this.editedTaskId = null;
+    }
+
+    this.modal.close();
   }
 
   render({ tasks }: TTasksState) {

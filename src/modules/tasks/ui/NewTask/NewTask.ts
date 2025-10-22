@@ -1,13 +1,12 @@
-import { Priority, Status } from "../../task.constants";
-
 import { TasksState } from "../../TasksState";
 import { TaskForm } from "../TaskForm/TaskForm";
 import { Modal } from "../../../../shared/Modal/Modal";
 import { UIComponent } from "../../../../shared/UIComponent/UIComponent";
+import type { TNewTask } from "../../tasks.types";
 
 export class NewTaskComponent extends UIComponent {
   state: TasksState;
-  form: HTMLElement;
+  form: TaskForm;
   modal: Modal;
   openModalBtn: HTMLElement;
   container: HTMLElement;
@@ -19,8 +18,8 @@ export class NewTaskComponent extends UIComponent {
     this.state = TasksState.getInstance();
     this.modal = Modal.init("Нове завдання");
 
-    this.form = new TaskForm().node;
-    this.form.addEventListener("submit", (e) => this.addTask(e));
+    this.form = new TaskForm();
+    this.form.onSubmit((data) => this.addTask({ ...data, createdAt: new Date() }));
 
     this.openModalBtn = this.parseTemplate(`
         <button class="add_task"  type="button">
@@ -30,34 +29,15 @@ export class NewTaskComponent extends UIComponent {
         </button>`);
 
     this.openModalBtn.addEventListener("click", () => {
-      this.modal.open(this.form);
+      this.modal.open(this.form.node);
     });
 
     this.container.appendChild(this.openModalBtn);
   }
 
-  async addTask(event: Event) {
-    event.preventDefault();
+  async addTask(newTask: TNewTask) {
+    await this.state.addTask(newTask);
 
-    const form = event.target as HTMLFormElement;
-    const formData = new FormData(form);
-
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
-    const deadline = formData.get("deadline") as string;
-    const priority = formData.get("priority") as Priority;
-    const status = formData.get("status") as Status;
-
-    await this.state.addTask({
-      title,
-      description,
-      priority,
-      deadline: new Date(deadline),
-      createdAt: new Date(),
-      status: status || Status.Todo,
-    });
-
-    form.reset();
     this.modal.close();
   }
 }
