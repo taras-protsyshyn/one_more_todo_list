@@ -1,4 +1,4 @@
-.add_task {
+.addTask {
   position: fixed;
   bottom: 20px;
   right: 20%;
@@ -8,6 +8,6 @@
   transition: transform ease-in-out 0.25s;
 }
 
-.add_task svg {
+.addTask svg {
   transform: scale(4);
 }

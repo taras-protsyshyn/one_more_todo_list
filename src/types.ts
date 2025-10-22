@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import { Status, Priority } from "./task.constants.js";
-import { taskSchema } from "./tasks.schemas";
+import { Status, Priority } from "./constants.js";
+import { taskSchema } from "./schemas";
 
 export type Filters = { status?: Status; priority?: Priority; createdAt?: Date };
 

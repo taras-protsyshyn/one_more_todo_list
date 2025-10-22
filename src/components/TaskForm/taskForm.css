@@ -1,14 +1,14 @@
-.task-form {
+.taskForm {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 
-.task-form .description {
+.taskForm .description {
   grid-column: span 2;
 }
 
-.task-form button {
+.taskForm button {
   grid-column: span 2;
   justify-self: end;
 }

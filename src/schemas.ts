@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { Status, Priority } from "./task.constants";
+import { Status, Priority } from "./constants";
 
 export const taskSchema = z.object({
   id: z.string(),
