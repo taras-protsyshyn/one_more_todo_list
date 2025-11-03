@@ -34,7 +34,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }
   if (!isOpen) return null;
 
   return createPortal(
-    <div id="modal" className={"modal" + (isOpen ? "show" : "")}>
+    <div id="modal" className={"modal" + (isOpen ? " show" : "")}>
       <div className="modal-content">
         <span onClick={onClose} className="close">
           &times;
