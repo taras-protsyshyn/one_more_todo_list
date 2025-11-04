@@ -1,7 +1,9 @@
-import { CreateTaskForm } from "./features/tasks/pages";
+import { RouterProvider } from "react-router-dom";
+
+import { router } from "./router";
 
 function App() {
-  return <CreateTaskForm />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

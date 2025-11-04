@@ -9,7 +9,7 @@ import "./createTaskForm.css";
 
 export const CreateTaskForm = () => {
   const [isOpen, setOpen] = useState(false);
-  const [callAddTask] = useCallApi<TTask, TTaskFormValues>(addTask);
+  const [callAddTask] = useCallApi<TTask, TTaskFormValues>((data) => addTask(data!));
 
   const onSubmit = (data: TTaskFormValues) => {
     callAddTask(data);

@@ -20,13 +20,10 @@ export const TaskForm = ({ onSubmit }: TaskFormProps) => {
     formState: { errors },
   } = useForm<TTaskFormValues>({
     resolver: zodResolver(taskFormSchema),
-    defaultValues: {
-      status: Status.Todo,
-      priority: Priority.Low,
-    },
   });
 
   const submit: SubmitHandler<TTaskFormValues> = (data) => {
+    console.log("form data", data);
     onSubmit(data);
   };
 

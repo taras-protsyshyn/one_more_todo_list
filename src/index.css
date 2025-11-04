@@ -18,6 +18,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -34,10 +39,11 @@ h1 {
 }
 
 #root {
-  max-width: 1280px;
+  max-width: 840px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  box-sizing: border-box;
+  padding: 0 20px;
 }
 
 button {

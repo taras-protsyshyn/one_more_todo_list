@@ -1,0 +1,27 @@
+.taskItem {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+  cursor: pointer;
+  border-radius: var(--br-radius);
+  border: 1px solid var(--br-color);
+  transition: border-color 0.25s ease-in-out;
+  padding: 16px;
+}
+
+.taskItem:hover {
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.taskItem--sub-info {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8em;
+  align-self: flex-start;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.taskItem--info {
+  text-align: start;
+}
