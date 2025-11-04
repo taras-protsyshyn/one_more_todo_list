@@ -46,30 +46,7 @@ h1 {
   padding: 0 20px;
 }
 
-button {
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  color: white;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: var(--btn-bg);
-  cursor: pointer;
-  transition: border-color 0.25s ease-in-out;
-  border: 1px solid var(--btn-bg);
-  border-radius: var(--br-radius);
-}
-button:hover {
-  border: 1px solid white;
-}
-button:focus,
-button:focus-visible {
-  outline: none;
-}
 
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
 
 input,
 select,
@@ -84,10 +61,17 @@ textarea {
   transition: border-color 0.25s ease-in-out;
 }
 
-input:hover,
-select:hover,
-textarea:hover {
+input:hover:not(:disabled),
+select:hover:not(:disabled),
+textarea:hover:not(:disabled) {
   border-color: white;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* reset styles for ul ol and li */

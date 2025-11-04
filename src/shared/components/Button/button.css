@@ -1,0 +1,36 @@
+button {
+  padding: 0.6em 1.2em;
+  min-height: 42px;
+  font-size: 1em;
+  color: white;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--btn-bg);
+  cursor: pointer;
+  transition: border-color 0.25s ease-in-out;
+  border: 1px solid var(--btn-bg);
+  border-radius: var(--br-radius);
+}
+
+button:hover:not(:disabled) {
+  border: 1px solid white;
+}
+
+button:focus,
+button:focus-visible {
+  outline: none;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button .loader .spinner {
+  width: 20px;
+  height: 20px;
+}
+
+button .loader.show::after {
+  opacity: 0;
+}
