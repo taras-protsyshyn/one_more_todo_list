@@ -19,7 +19,7 @@ export const EditTask = () => {
 
   const getTaskByIdFetcher = useCallback(() => getTaskById(taskId!), [taskId]);
 
-  const [callGetTaskById, { data: task }] = useCallApi<TTask>(getTaskByIdFetcher);
+  const [callGetTaskById, { data: task, loading }] = useCallApi<TTask>(getTaskByIdFetcher);
 
   const onClose = () => {
     navigate(-1);
@@ -48,7 +48,7 @@ export const EditTask = () => {
   return (
     <>
       <Modal isOpen={true} onClose={onClose} title="Edit Task">
-        <TaskForm onSubmit={onSubmit} register={register} errors={errors} />
+        <TaskForm loading={loading} onSubmit={onSubmit} register={register} errors={errors} />
       </Modal>
     </>
   );
