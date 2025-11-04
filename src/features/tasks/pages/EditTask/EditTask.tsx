@@ -13,7 +13,7 @@ export const EditTask = () => {
   const { taskId } = useParams<{ taskId: string }>();
   const { register, handleSubmit, errors, setValue } = useTaskForm();
 
-  const [callAddTask] = useCallApi<TEditTask, TTaskFormValues>((data) =>
+  const [callUpdateTask, { loading: submitting }] = useCallApi<TEditTask, TTaskFormValues>((data) =>
     updateTask({ id: taskId!, ...data! })
   );
 
@@ -26,7 +26,7 @@ export const EditTask = () => {
   };
 
   const onSubmit = handleSubmit(async (data: TTaskFormValues) => {
-    await callAddTask(data);
+    await callUpdateTask(data);
     onClose();
   });
 
@@ -48,7 +48,13 @@ export const EditTask = () => {
   return (
     <>
       <Modal isOpen={true} onClose={onClose} title="Edit Task">
-        <TaskForm loading={loading} onSubmit={onSubmit} register={register} errors={errors} />
+        <TaskForm
+          loading={loading}
+          submitting={submitting}
+          onSubmit={onSubmit}
+          register={register}
+          errors={errors}
+        />
       </Modal>
     </>
   );

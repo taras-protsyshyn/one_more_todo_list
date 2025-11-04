@@ -9,18 +9,24 @@ import type { TTask, TTaskFormValues } from "../../types";
 
 export const NewTaskForm = () => {
   const navigate = useNavigate();
-  const [callAddTask] = useCallApi<TTask, TTaskFormValues>((data) => addTask(data!));
+  const [callAddTask, { loading: submitting }] = useCallApi<TTask, TTaskFormValues>((data) =>
+    addTask(data!)
+  );
   const { register, handleSubmit, errors } = useTaskForm();
-  const onSubmit = handleSubmit((data) => callAddTask(data));
 
   const onClose = () => {
     navigate(-1);
   };
 
+  const onSubmit = handleSubmit(async (data) => {
+    await callAddTask(data);
+    onClose();
+  });
+
   return (
     <>
       <Modal isOpen={true} onClose={onClose} title="Create New Task">
-        <TaskForm onSubmit={onSubmit} register={register} errors={errors} />
+        <TaskForm onSubmit={onSubmit} submitting={submitting} register={register} errors={errors} />
       </Modal>
     </>
   );
