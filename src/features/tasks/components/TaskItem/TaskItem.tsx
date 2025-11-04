@@ -1,32 +1,28 @@
 import { formatDate } from "../../../../shared/utils";
 import { Button, TrashIcon } from "../../../../shared/components";
+import { useDeleteTask } from "../../hooks";
+
 import type { Priority, Status } from "../../constants";
 
 import "./taskItem.css";
 
 type TaskItemProps = {
+  id: string;
   title: string;
   status: Status;
   priority: Priority;
   deadline: Date;
-  onDelete: () => void;
   onClick: () => void;
-  deleting?: boolean;
 };
 
-export const TaskItem = ({
-  onDelete,
-  onClick,
-  title,
-  status,
-  priority,
-  deadline,
-  deleting,
-}: TaskItemProps) => {
+export const TaskItem = ({ onClick, id, title, status, priority, deadline }: TaskItemProps) => {
+  const { onDelete, loading: deleting } = useDeleteTask();
+
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    onDelete();
+    onDelete(id);
   };
+
   return (
     <li className="taskItem" onClick={onClick}>
       <div className="taskItem--info">

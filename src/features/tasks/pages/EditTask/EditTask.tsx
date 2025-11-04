@@ -1,38 +1,28 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useCallApi } from "../../../../shared/hooks/useCallApi";
-import { updateTask, getTaskById } from "../../api";
 import { Modal } from "../../../../shared/components";
 import { TaskForm } from "../../components";
-import { useTaskForm } from "../../hooks";
-import type { TEditTask, TTask, TTaskFormValues } from "../../types";
+import { useTaskForm, useTaskDetails, useEditTask } from "../../hooks";
+
+import type { TTaskFormValues } from "../../types";
 
 export const EditTask = () => {
   const navigate = useNavigate();
   const { taskId } = useParams<{ taskId: string }>();
   const { register, handleSubmit, errors, setValue } = useTaskForm();
 
-  const [callUpdateTask, { loading: submitting }] = useCallApi<TEditTask, TTaskFormValues>((data) =>
-    updateTask({ id: taskId!, ...data! })
-  );
+  const closeModal = () => navigate(-1);
 
-  const getTaskByIdFetcher = useCallback(() => getTaskById(taskId!), [taskId]);
-
-  const [callGetTaskById, { data: task, loading }] = useCallApi<TTask>(getTaskByIdFetcher);
-
-  const onClose = () => {
-    navigate(-1);
-  };
-
-  const onSubmit = handleSubmit(async (data: TTaskFormValues) => {
-    await callUpdateTask(data);
-    onClose();
+  const [editTask, { loading: submitting }] = useEditTask({
+    onSuccess: closeModal,
   });
 
-  useEffect(() => {
-    callGetTaskById();
-  }, [callGetTaskById]);
+  const { task, loading } = useTaskDetails(taskId);
+
+  const onSubmit = handleSubmit(async (data: TTaskFormValues) =>
+    editTask({ id: taskId!, ...data })
+  );
 
   useEffect(() => {
     if (task) {
@@ -47,7 +37,7 @@ export const EditTask = () => {
 
   return (
     <>
-      <Modal isOpen={true} onClose={onClose} title="Edit Task">
+      <Modal isOpen={true} onClose={closeModal} title="Edit Task">
         <TaskForm
           loading={loading}
           submitting={submitting}

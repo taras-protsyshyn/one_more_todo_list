@@ -2,48 +2,12 @@
   "tasks": [
     {
       "id": "1",
-      "title": "Налаштувати базу даних редагоавано",
+      "title": "Налаштувати базу даних редагоавано 3",
       "description": "Створити схему бази даних та налаштувати підключення",
       "createdAt": "2025-10-01T10:30:00Z",
       "status": "todo",
       "priority": "high",
       "deadline": "2025-11-21T00:00:00.000Z"
-    },
-    {
-      "id": "2",
-      "title": "Написати unit тести",
-      "description": "Покрити основні функції unit тестами з покриттям не менше 80%",
-      "createdAt": "2025-10-02T14:15:00Z",
-      "status": "todo",
-      "priority": "low",
-      "deadline": "2025-11-08T00:00:00.000Z"
-    },
-    {
-      "id": "dcc0",
-      "title": "Нове завдання",
-      "description": "",
-      "priority": "low",
-      "deadline": "2025-12-01T00:00:00.000Z",
-      "status": "todo",
-      "createdAt": "2025-10-22T07:22:44.629Z"
-    },
-    {
-      "id": "4c82",
-      "title": "Найновіше завдання",
-      "description": "",
-      "priority": "low",
-      "deadline": "2027-09-09T00:00:00.000Z",
-      "createdAt": "2025-10-22T17:56:43.069Z",
-      "status": "todo"
-    },
-    {
-      "id": "fe57",
-      "title": "Ще одне тестове завдання",
-      "description": "рандомний опис",
-      "deadline": "2025-12-02T00:00:00.000Z",
-      "status": "todo",
-      "priority": "medium",
-      "createdAt": "2025-11-04T13:11:26.637Z"
     }
   ]
 }

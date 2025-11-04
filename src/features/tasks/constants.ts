@@ -9,3 +9,10 @@ export enum Priority {
   Medium = "medium",
   High = "high",
 }
+
+export enum TaskReducerType {
+  SetTasks = "SET_TASKS",
+  AddTask = "ADD_TASK",
+  UpdateTask = "UPDATE_TASK",
+  DeleteTask = "DELETE_TASK",
+}

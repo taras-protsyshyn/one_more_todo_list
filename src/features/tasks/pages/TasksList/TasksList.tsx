@@ -1,34 +1,15 @@
-import { useCallback, useEffect } from "react";
-import { Outlet, useNavigate, useLocation } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 
 import { TaskItem, NewTaskBtn } from "../../components";
-import { useCallApi } from "../../../../shared/hooks";
-import { deleteTask, getTasks } from "../../api";
 import { routs } from "../../../../router";
 import { Loader } from "../../../../shared/components";
-
-import type { TTask } from "../../types";
+import { useTasksList } from "../../hooks";
 
 import "./tasksList.css";
 
 export const TasksList = () => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const [callApi, { data, loading, error }] = useCallApi<Array<TTask>>(getTasks);
-  const deleteTaskFetcher = useCallback((id?: string) => deleteTask(id!), []);
-  const [callDeleteApi, { loading: deleting }] = useCallApi<string, string>(deleteTaskFetcher);
-
-  useEffect(() => {
-    // refetch tasks when returning to the tasks list
-    if (pathname === routs.HOME) {
-      callApi();
-    }
-  }, [callApi, pathname]);
-
-  const handleDelete = async (id: string) => {
-    await callDeleteApi(id);
-    await callApi();
-  };
+  const { tasks, loading, error } = useTasksList();
 
   const handleClick = (id: string) => {
     navigate(routs.taskPath(id));
@@ -40,16 +21,10 @@ export const TasksList = () => {
         <h1>Task List</h1>
         <Loader style={{ minHeight: "calc(100vh - 125px)" }} loading={loading}>
           <ul className="tasksList">
-            {!loading && data?.length === 0 && <p>No tasks available.</p>}
+            {!loading && tasks?.length === 0 && <p>No tasks available.</p>}
             {!loading && error && <p>Error loading tasks: {error.message}</p>}
-            {data?.map(({ id, ...rest }) => (
-              <TaskItem
-                key={id}
-                onDelete={() => handleDelete(id)}
-                onClick={() => handleClick(id)}
-                deleting={deleting}
-                {...rest}
-              />
+            {tasks?.map(({ id, ...rest }) => (
+              <TaskItem key={id} id={id} onClick={() => handleClick(id)} {...rest} />
             ))}
           </ul>
         </Loader>
