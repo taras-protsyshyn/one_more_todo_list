@@ -1,3 +1,8 @@
+.tasksListWrapper {
+  position: relative;
+  padding: 0 64px;
+}
+
 .tasksList {
   display: flex;
   flex-direction: column;

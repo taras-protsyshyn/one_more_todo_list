@@ -1,1 +1,2 @@
-export { CreateTaskForm } from "./CreateTaskForm/CreateTaskForm";
+export { NewTaskForm } from "./NewTaskForm/NewTaskForm";
+export { TasksList } from "./TasksList/TasksList";
