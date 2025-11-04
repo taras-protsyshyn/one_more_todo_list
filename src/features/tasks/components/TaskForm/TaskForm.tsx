@@ -1,37 +1,21 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { SubmitHandler } from "react-hook-form";
+import type { FieldErrors, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
 
 import { Input, Textarea, Select } from "../../../../shared/components/Inputs";
 import { Status, Priority } from "../../constants";
-import { taskFormSchema } from "../../schemas";
 import type { TTaskFormValues } from "../../types";
 
 import "./taskForm.css";
+import type { BaseSyntheticEvent } from "react";
 
 type TaskFormProps = {
-  onSubmit: (data: TTaskFormValues) => void;
+  register: UseFormRegister<TTaskFormValues>;
+  errors: FieldErrors<TTaskFormValues>;
+  onSubmit: (e?: BaseSyntheticEvent<object> | undefined) => Promise<void>;
 };
 
-export const TaskForm = ({ onSubmit }: TaskFormProps) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<TTaskFormValues>({
-    resolver: zodResolver(taskFormSchema),
-    defaultValues: {
-      status: Status.Todo,
-      priority: Priority.Low,
-    },
-  });
-
-  const submit: SubmitHandler<TTaskFormValues> = (data) => {
-    onSubmit(data);
-  };
-
+export const TaskForm = ({ onSubmit, register, errors }: TaskFormProps) => {
   return (
-    <form onSubmit={handleSubmit(submit)} className="taskForm">
+    <form onSubmit={onSubmit} className="taskForm">
       <Input placeholder="Завдання" {...register("title")} error={errors.title?.message} />
       <Input type="date" {...register("deadline")} error={errors.deadline?.message} />
       <Select
