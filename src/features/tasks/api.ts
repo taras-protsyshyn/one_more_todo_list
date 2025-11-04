@@ -1,6 +1,6 @@
 import { fetchData } from "../../shared/api";
 import { taskSchema } from "./schemas";
-import type { TEditTask, TNewTask, TTask, TTaskFormValues } from "./types";
+import type { TEditTask, TNewTask, TTaskFormValues } from "./types";
 
 export const getTasks = async () => {
   const data = await fetchData("/tasks");
@@ -27,6 +27,6 @@ export const updateTask = async (task: TEditTask) => {
 };
 
 export const deleteTask = async (id: string) => {
-  await fetchData<TTask>(`/tasks/${id}`, "DELETE");
+  await fetchData(`/tasks/${id}`, "DELETE");
   return id;
 };

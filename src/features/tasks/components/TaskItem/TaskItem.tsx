@@ -1,5 +1,5 @@
 import { formatDate } from "../../../../shared/utils";
-import { TrashIcon } from "../../../../shared/components";
+import { Button, TrashIcon } from "../../../../shared/components";
 import type { Priority, Status } from "../../constants";
 
 import "./taskItem.css";
@@ -11,6 +11,7 @@ type TaskItemProps = {
   deadline: Date;
   onDelete: () => void;
   onClick: () => void;
+  deleting?: boolean;
 };
 
 export const TaskItem = ({
@@ -20,7 +21,12 @@ export const TaskItem = ({
   status,
   priority,
   deadline,
+  deleting,
 }: TaskItemProps) => {
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    onDelete();
+  };
   return (
     <li className="taskItem" onClick={onClick}>
       <div className="taskItem--info">
@@ -31,9 +37,9 @@ export const TaskItem = ({
           <span>Deadline: {formatDate(deadline)}</span>
         </div>
       </div>
-      <button onClick={onDelete}>
+      <Button loading={deleting} onClick={handleDelete}>
         <TrashIcon />
-      </button>
+      </Button>
     </li>
   );
 };

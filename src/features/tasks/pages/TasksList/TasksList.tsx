@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router";
 
 import { TaskItem, NewTaskBtn } from "../../components";
 import { useCallApi } from "../../../../shared/hooks";
-import { getTasks } from "../../api";
+import { deleteTask, getTasks } from "../../api";
 import { routs } from "../../../../router";
 import { Loader } from "../../../../shared/components";
 
@@ -15,6 +15,8 @@ export const TasksList = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [callApi, { data, loading, error }] = useCallApi<Array<TTask>>(getTasks);
+  const deleteTaskFetcher = useCallback((id?: string) => deleteTask(id!), []);
+  const [callDeleteApi, { loading: deleting }] = useCallApi<string, string>(deleteTaskFetcher);
 
   useEffect(() => {
     // refetch tasks when returning to the tasks list
@@ -23,8 +25,9 @@ export const TasksList = () => {
     }
   }, [callApi, pathname]);
 
-  const handleDelete = (id: string) => {
-    console.log("Delete task with id:", id);
+  const handleDelete = async (id: string) => {
+    await callDeleteApi(id);
+    await callApi();
   };
 
   const handleClick = (id: string) => {
@@ -44,6 +47,7 @@ export const TasksList = () => {
                 key={id}
                 onDelete={() => handleDelete(id)}
                 onClick={() => handleClick(id)}
+                deleting={deleting}
                 {...rest}
               />
             ))}
