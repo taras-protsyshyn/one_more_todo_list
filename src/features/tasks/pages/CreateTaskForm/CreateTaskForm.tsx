@@ -1,10 +1,11 @@
 import { useState } from "react";
 
-import { useCallApi } from "../../hooks/useCallApi";
-import { addTask } from "../../api/api";
-import { Modal, TaskForm } from "../";
-import "./createTaskForm.css";
+import { useCallApi } from "../../../../shared/hooks/useCallApi";
+import { addTask } from "../../api";
+import { Modal } from "../../../../shared/components";
+import { TaskForm } from "../../components";
 import type { TTask, TTaskFormValues } from "../../types";
+import "./createTaskForm.css";
 
 export const CreateTaskForm = () => {
   const [isOpen, setOpen] = useState(false);

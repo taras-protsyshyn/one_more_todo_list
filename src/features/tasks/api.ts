@@ -1,5 +1,5 @@
-import { taskSchema } from "../schemas";
-import type { TEditTask, TNewTask, TTask, TTaskFormValues } from "../types";
+import { taskSchema } from "./schemas";
+import type { TEditTask, TNewTask, TTask, TTaskFormValues } from "./types";
 
 const API_BASE_URL = "http://localhost:3001";
 

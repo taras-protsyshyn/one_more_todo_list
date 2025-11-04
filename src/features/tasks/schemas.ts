@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { Status, Priority } from "./constants";
+import { Status, Priority } from "../../shared/constants";
 
 export const taskFormSchema = z.object({
   title: z.string().min(1, "Title cannot be empty"),

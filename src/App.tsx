@@ -1,4 +1,4 @@
-import { CreateTaskForm } from "./components";
+import { CreateTaskForm } from "./features/tasks/pages";
 
 function App() {
   return <CreateTaskForm />;

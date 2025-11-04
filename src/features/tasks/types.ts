@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import { Status, Priority } from "./constants.js";
-import { taskFormSchema, taskSchema } from "./schemas";
+import { Status, Priority } from "../../shared/constants.js";
+import { taskFormSchema, taskSchema } from "./schemas.js";
 
 export type Filters = { status?: Status; priority?: Priority; createdAt?: Date };
 
@@ -13,7 +13,3 @@ export type TTaskFormValues = z.infer<typeof taskFormSchema>;
 export type TTasksState = {
   tasks: TTask[];
 };
-
-export abstract class TasksComponent {
-  abstract render(data: TTasksState): void;
-}

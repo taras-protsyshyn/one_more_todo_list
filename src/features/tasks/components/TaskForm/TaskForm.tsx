@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
 
-import { Input, Textarea, Select } from "../Inputs";
-import { Status, Priority } from "../../constants";
+import { Input, Textarea, Select } from "../../../../shared/components/Inputs";
+import { Status, Priority } from "../../../../shared/constants";
 import { taskFormSchema } from "../../schemas";
 import type { TTaskFormValues } from "../../types";
 
