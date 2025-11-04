@@ -6,12 +6,19 @@ type LoaderProps = {
   loading?: boolean;
   hideChildren?: boolean; // Optional prop to hide children when loading
   style?: React.CSSProperties;
+  overlay?: boolean;
 };
 
-export const Loader = ({ children, loading, hideChildren = false, style }: LoaderProps) => {
+export const Loader = ({
+  children,
+  loading,
+  hideChildren = false,
+  style,
+  overlay = true,
+}: LoaderProps) => {
   return (
-    <div style={style} className={`loader ${loading ? "show" : ""} `}>
-      {!hideChildren && children}
+    <div style={style} className={`loader ${loading ? "show" : ""} ${overlay ? "overlay" : ""}`}>
+      {hideChildren && loading ? null : children}
       {loading && <SpinnerIcon className="spinner" />}
     </div>
   );
